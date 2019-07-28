@@ -26,12 +26,14 @@ public class ClientInfo {
 
     public static ClientInfo createClientInfo(final Path path) throws IOException {
         final Properties props = new Properties();
-        System.out.println();
         try (InputStream in = new FileInputStream(path.toFile())) {
             props.load(in);
         }
-        System.out.println(props);
         return new ClientInfo(props.getProperty("consumerKey"), props.getProperty("accessToken"));
+    }
+
+    public String toQueryStr() {
+        return "?consumer_key=" + consumerKey + "&access_token=" + accessToken;
     }
 
 }

@@ -1,6 +1,6 @@
 package jp.sitogi.pocket.conditions;
 
-public enum State {
+public enum State implements Condition {
 
     UNREAD("unread"),
     ARCHIVE("archive"),
@@ -14,8 +14,8 @@ public enum State {
     }
 
     @Override
-    public String toString() {
-       return value;
+    public String toQueryStr() {
+        return "state=" + value;
     }
 
 }

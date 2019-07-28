@@ -1,21 +1,21 @@
 package jp.sitogi.pocket.conditions;
 
-public enum ContentType {
+public enum ContentType implements Condition {
 
     ARTICLE("article"),
     VIDEO("video"),
     IMAGE("image"),
     ;
 
-    private final String value;
+    private final String contentType;
 
-    ContentType(final String value) {
-        this.value = value;
+    ContentType(final String contentType) {
+        this.contentType = contentType;
     }
 
     @Override
-    public String toString() {
-        return value;
+    public String toQueryStr() {
+        return "contentType=" + contentType;
     }
 
 }
