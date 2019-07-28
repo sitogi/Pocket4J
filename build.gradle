@@ -11,6 +11,11 @@ repositories {
     mavenCentral()
 }
 
+task copyLib(type: Copy) {
+    from configurations.compile
+    into 'build/libs'
+}
+
 dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9.1'
