@@ -25,6 +25,9 @@ public class RetrievedItem {
     @JsonProperty("time_added")
     private String addedTime;
 
+    @JsonProperty("resolved_title")
+    private String resolvedTitle;
+
     public String getItemId() {
         return itemId;
     }
@@ -44,6 +47,10 @@ public class RetrievedItem {
     public LocalDateTime getAddedDate() {
         return LocalDateTime.ofEpochSecond(Long.parseLong(addedTime), 0,
                 ZoneId.systemDefault().getRules().getOffset(Instant.now()));
+    }
+
+    public String getResolvedTitle() {
+        return resolvedTitle;
     }
 
 }
