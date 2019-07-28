@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public class Count implements Condition {
 
     private final int count;
@@ -13,8 +17,8 @@ public class Count implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "count=" + count;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("count", String.valueOf(count));
     }
 
 }

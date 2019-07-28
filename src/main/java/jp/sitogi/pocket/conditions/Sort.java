@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public enum Sort implements Condition {
 
     NEWEST("newest"),
@@ -15,8 +19,8 @@ public enum Sort implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "sort=" + value;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("sort", value);
     }
 
 }

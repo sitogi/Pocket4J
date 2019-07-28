@@ -1,5 +1,8 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
 import java.util.Date;
 
 public class Since implements Condition {
@@ -11,9 +14,8 @@ public class Since implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        // API には UNIX 時間で渡す
-        return "timestamp=" + date.getTime();
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("since", String.valueOf(date.getTime()));
     }
 
 }

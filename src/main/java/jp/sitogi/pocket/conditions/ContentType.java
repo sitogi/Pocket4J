@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public enum ContentType implements Condition {
 
     ARTICLE("article"),
@@ -14,8 +18,8 @@ public enum ContentType implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "contentType=" + contentType;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("contentType", contentType);
     }
 
 }

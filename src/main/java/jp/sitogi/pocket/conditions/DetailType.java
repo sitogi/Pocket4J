@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public enum DetailType implements Condition {
 
     SIMPLE("simple"),
@@ -13,8 +17,9 @@ public enum DetailType implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "detailType=" + detailType;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("detailType", detailType);
+
     }
 
 }

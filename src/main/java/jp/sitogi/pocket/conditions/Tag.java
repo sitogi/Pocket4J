@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public class Tag implements Condition {
 
     private final String value;
@@ -17,8 +21,7 @@ public class Tag implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "tag=" + value;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("tag", value);
     }
-
 }

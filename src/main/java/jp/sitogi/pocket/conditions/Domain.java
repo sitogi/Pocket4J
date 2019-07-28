@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public class Domain implements Condition {
 
     private final String domain;
@@ -13,8 +17,8 @@ public class Domain implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "domain=" + domain;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("domain", domain);
     }
 
 }

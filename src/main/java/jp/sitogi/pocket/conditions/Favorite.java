@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public class Favorite implements Condition {
 
     private final boolean favorite;
@@ -9,9 +13,8 @@ public class Favorite implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        // API には 0 か 1 で渡す
-        return "favorite=" + (favorite ? 1 : 0);
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("favorite", String.valueOf((favorite ? 1 : 0)));
     }
 
 }

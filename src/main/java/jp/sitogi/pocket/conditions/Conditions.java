@@ -1,5 +1,8 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +19,15 @@ public class Conditions {
     }
 
     public static Conditions defaultConditions() {
-        final Conditions defaultCond = newConditions();
-        defaultCond.state(State.UNREAD);
-        return defaultCond;
+        return newConditions()
+                .state(State.UNREAD)
+                .detailType(DetailType.SIMPLE);
     }
 
-    public String toQueryStr() {
-        final StringBuilder bf = new StringBuilder();
-
-        // consumer_key と access_token は必須で付加済みなので ? の考慮は不要
-        conditionList.forEach(c -> bf.append("&").append(c.toQueryStr()));
-
-        return bf.toString();
+    public void appendJson(JsonGenerator generator) throws IOException {
+        for (final Condition condition : conditionList) {
+            condition.appendJsonBody(generator);
+        }
     }
 
     public Conditions state(final State state) {
@@ -83,11 +83,6 @@ public class Conditions {
     public Conditions offset(final Offset offset) {
         conditionList.add(offset);
         return this;
-    }
-
-    @Override
-    public String toString() {
-        return "";
     }
 
 }

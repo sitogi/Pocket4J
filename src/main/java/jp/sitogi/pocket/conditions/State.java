@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public enum State implements Condition {
 
     UNREAD("unread"),
@@ -14,8 +18,9 @@ public enum State implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "state=" + value;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("state", value);
+
     }
 
 }

@@ -1,5 +1,9 @@
 package jp.sitogi.pocket.conditions;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+
 public class Search implements Condition {
 
     private final String searchStr;
@@ -13,8 +17,8 @@ public class Search implements Condition {
     }
 
     @Override
-    public String toQueryStr() {
-        return "search=" + searchStr;
+    public void appendJsonBody(final JsonGenerator generator) throws IOException {
+        generator.writeStringField("search", searchStr);
     }
 
 }
