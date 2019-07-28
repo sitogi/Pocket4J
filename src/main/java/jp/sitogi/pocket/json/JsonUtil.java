@@ -1,26 +1,17 @@
 package jp.sitogi.pocket.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jp.sitogi.pocket.client.ClientInfo;
-import jp.sitogi.pocket.conditions.Conditions;
+
+import java.io.IOException;
 
 public class JsonUtil {
 
     private JsonUtil() {
     }
 
-    public static String clientInfoToJson(ClientInfo clientInfo) throws JsonProcessingException {
+    public static <T> T toObj(final String body, final Class<T> type) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(clientInfo);
+        return mapper.readValue(body, type);
     }
-
-    public static String conditionsToJson(Conditions conditions) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(conditions);
-    }
-
-
-
 
 }
